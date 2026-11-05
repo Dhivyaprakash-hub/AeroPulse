@@ -1,0 +1,248 @@
+{
+  "scope": "BTS Reporting Carrier On-Time Performance; Jan-Mar 2025",
+  "source_zip_inventory": [
+    {
+      "file": "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_1.zip",
+      "zip_bytes": 27108664,
+      "csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_1.csv",
+      "csv_uncompressed_bytes": 243177378,
+      "rows": 539747,
+      "columns_in_csv": 110,
+      "expected_month": 1
+    },
+    {
+      "file": "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_2.zip",
+      "zip_bytes": 25302583,
+      "csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_2.csv",
+      "csv_uncompressed_bytes": 228245475,
+      "rows": 504884,
+      "columns_in_csv": 110,
+      "expected_month": 2
+    },
+    {
+      "file": "On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_3.zip",
+      "zip_bytes": 30544825,
+      "csv_member": "On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_3.csv",
+      "csv_uncompressed_bytes": 271623365,
+      "rows": 600872,
+      "columns_in_csv": 110,
+      "expected_month": 3
+    }
+  ],
+  "row_count": 1645503,
+  "column_count_full_csv": 110,
+  "audited_columns": [
+    "Year",
+    "Quarter",
+    "Month",
+    "FlightDate",
+    "Reporting_Airline",
+    "DOT_ID_Reporting_Airline",
+    "Tail_Number",
+    "Flight_Number_Reporting_Airline",
+    "OriginAirportID",
+    "Origin",
+    "DestAirportID",
+    "Dest",
+    "CRSDepTime",
+    "DepTime",
+    "DepDelay",
+    "DepDelayMinutes",
+    "CRSArrTime",
+    "ArrTime",
+    "ArrDelay",
+    "ArrDel15",
+    "Cancelled",
+    "Diverted",
+    "CRSElapsedTime",
+    "ActualElapsedTime",
+    "Distance"
+  ],
+  "date_min": "2025-01-01",
+  "date_max": "2025-03-31",
+  "distinct_reporting_airlines": 14,
+  "distinct_origin_airports": 333,
+  "distinct_destination_airports": 333,
+  "distinct_tail_numbers_all_rows": 5787,
+  "distinct_flight_numbers": 6508,
+  "missingness_core_fields": [
+    {
+      "field": "FlightDate",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "Reporting_Airline",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "Tail_Number",
+      "missing_rows": 4102,
+      "missing_pct": 0.24929
+    },
+    {
+      "field": "Flight_Number_Reporting_Airline",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "OriginAirportID",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "DestAirportID",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "CRSDepTime",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "DepTime",
+      "missing_rows": 29560,
+      "missing_pct": 1.79641
+    },
+    {
+      "field": "DepDelay",
+      "missing_rows": 29671,
+      "missing_pct": 1.80316
+    },
+    {
+      "field": "CRSArrTime",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "ArrTime",
+      "missing_rows": 31252,
+      "missing_pct": 1.89924
+    },
+    {
+      "field": "ArrDelay",
+      "missing_rows": 34457,
+      "missing_pct": 2.09401
+    },
+    {
+      "field": "Cancelled",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "Diverted",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "CRSElapsedTime",
+      "missing_rows": 0,
+      "missing_pct": 0.0
+    },
+    {
+      "field": "ActualElapsedTime",
+      "missing_rows": 34457,
+      "missing_pct": 2.09401
+    }
+  ],
+  "validation_and_rotation_coverage": {
+    "flight_date_invalid_rows": 0,
+    "out_of_requested_period_rows": 0,
+    "invalid_crs_departure_hhmm_rows": 0,
+    "invalid_crs_arrival_hhmm_rows": 0,
+    "operated_rows": 1611046,
+    "cancelled_rows": 30640,
+    "diverted_rows": 3817,
+    "operated_rows_with_arrdelay": 1611046,
+    "operated_rows_with_tail": 1611046,
+    "operated_tail_rows_with_arrdelay": 1611046,
+    "operated_unique_tails": 5781,
+    "tail_numbers_with_2plus_operated_flights": 5771,
+    "tail_numbers_with_10plus_operated_flights": 5676,
+    "flight_key_duplicate_rows": 0,
+    "flight_key_duplicate_groups": 0,
+    "route_offset_rows_operated": 1611030,
+    "route_offset_rows_operated_pct": 99.999,
+    "route_offset_residual_le_2min_pct": 99.999,
+    "route_offset_non_integral_hour_rows": 16,
+    "exact_full_row_duplicate_rows_by_64bit_hash": 0,
+    "exact_full_row_duplicate_groups_by_64bit_hash": 0,
+    "full_row_hashes_compared": 1645503
+  },
+  "delay_clock_consistency_and_target_distribution": {
+    "operated_with_valid_actual_departure_clock": 1610911,
+    "operated_departure_delay_clock_match_within_2min": 1610896,
+    "operated_departure_delay_clock_mismatch_gt_2min": 15,
+    "operated_with_valid_actual_arrival_clock": 1610214,
+    "operated_arrival_delay_clock_match_within_2min": 1610180,
+    "operated_arrival_delay_clock_mismatch_gt_2min": 34,
+    "operated_arrdelay_median_minutes": -8.0,
+    "operated_arrdelay_p90_minutes": 41.0,
+    "operated_arrdelay_p95_minutes": 80.0,
+    "operated_arrdelay_ge_15_pct": 19.6932,
+    "operated_arrdelay_negative_pct": 64.3653
+  },
+  "route_offset_diagnostic": {
+    "route_count_with_usable_offset": 5908,
+    "route_modal_agreement_median": 1.0,
+    "route_modal_agreement_p10": 0.994335,
+    "routes_with_modal_agreement_ge_99pct": 5331,
+    "routes_with_modal_agreement_lt_95pct": 557,
+    "inferred_offset_difference_distribution": {
+      "-6": 190,
+      "-5": 687,
+      "-4": 824,
+      "-3": 47415,
+      "-2": 86633,
+      "-1": 266051,
+      "0": 807203,
+      "1": 266210,
+      "2": 86523,
+      "3": 47476,
+      "4": 933,
+      "5": 693,
+      "6": 192
+    }
+  },
+  "monthly_summary": [
+    {
+      "month": "2025-01",
+      "flights": 539747,
+      "carriers": 14,
+      "origin_airports": 329,
+      "destination_airports": 329,
+      "tails": 5612,
+      "tail_present": 537217,
+      "cancelled": 16312.0,
+      "diverted": 1166.0,
+      "tail_coverage_pct": 99.5313
+    },
+    {
+      "month": "2025-02",
+      "flights": 504884,
+      "carriers": 14,
+      "origin_airports": 330,
+      "destination_airports": 330,
+      "tails": 5566,
+      "tail_present": 504080,
+      "cancelled": 7405.0,
+      "diverted": 1003.0,
+      "tail_coverage_pct": 99.8408
+    },
+    {
+      "month": "2025-03",
+      "flights": 600872,
+      "carriers": 14,
+      "origin_airports": 332,
+      "destination_airports": 332,
+      "tails": 5631,
+      "tail_present": 600104,
+      "cancelled": 6923.0,
+      "diverted": 1648.0,
+      "tail_coverage_pct": 99.8722
+    }
+  ],
+  "important_caveat": "Repeated tail identifiers and route/time consistency are audit evidence, not yet proof that every aircraft rotation can be reconstructed without omitted ferry, non-reporting, or missing-tail legs."
+}

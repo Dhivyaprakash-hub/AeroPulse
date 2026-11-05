@@ -1,0 +1,69 @@
+{
+  "method": "Schedule-derived UTC-offset differences (CRS local HHMM and CRSElapsedTime), anchored to Atlanta via IANA America/New_York; consecutive reported flights ordered by actual departure UTC; previous leg must arrive >=60 minutes before target scheduled departure.",
+  "dst_transition_boundary": "Flights whose scheduled origin and destination local timestamps fall on different EST/EDT regimes are excluded from the first-pass offset graph; this targets the 2025-03-09 US DST transition.",
+  "atl_airport_id": 10397,
+  "offset_graph_by_regime": {
+    "EST": {
+      "stable_route_edges_ge_98pct_agreement": 5872,
+      "airports_reached_from_ATL": 333,
+      "airports_in_audit": 333,
+      "cycle_conflicts_encountered_during_spanning_walk": 0
+    },
+    "EDT": {
+      "stable_route_edges_ge_98pct_agreement": 5705,
+      "airports_reached_from_ATL": 332,
+      "airports_in_audit": 332,
+      "cycle_conflicts_encountered_during_spanning_walk": 0
+    }
+  },
+  "operated_tail_flights_loaded": 1611046,
+  "flights_with_inferred_origin_and_arrival_offsets": 1611030,
+  "coverage_pct_of_operated_tail_flights": 99.999,
+  "dst_regime_crossing_rows_excluded": 338,
+  "unmapped_origin_offset_rows": 0,
+  "unmapped_actual_arrival_offset_rows": 0,
+  "duplicate_physical_key_rows_before_dedup": 0,
+  "same_tail_and_connecting_airport_adjacent_observations": 1580949,
+  "previous_leg_arrived_by_60_min_prediction_cutoff": 1053283,
+  "same_tail_airport_pairs_arrival_after_cutoff": 527666,
+  "median_scheduled_gap_after_previous_actual_arrival_minutes": 75.0,
+  "p01_scheduled_gap_after_previous_actual_arrival_minutes": -96.0,
+  "negative_gap_pairs": 77456,
+  "actual_turnaround_gap_minutes": {
+    "pairs": 1580949,
+    "negative_pairs": 15,
+    "under_15_min_pairs": 91,
+    "median": 75.0,
+    "p01": 27.0,
+    "p99": 2083.0
+  },
+  "linked_targets_by_month": [
+    {
+      "month": "2025-01",
+      "operated_tail_flights": 522266,
+      "consecutive_same_tail_same_airport": 509017,
+      "previous_arrived_at_least_60m_before_sched_dep": 348199,
+      "distinct_tails": 5609
+    },
+    {
+      "month": "2025-02",
+      "operated_tail_flights": 496468,
+      "consecutive_same_tail_same_airport": 489067,
+      "previous_arrived_at_least_60m_before_sched_dep": 327584,
+      "distinct_tails": 5563
+    },
+    {
+      "month": "2025-03",
+      "operated_tail_flights": 592296,
+      "consecutive_same_tail_same_airport": 583057,
+      "previous_arrived_at_least_60m_before_sched_dep": 377500,
+      "distinct_tails": 5626
+    }
+  ],
+  "limitations": [
+    "BTS local-time fields do not directly provide UTC timestamps; inferred airport offsets depend on scheduled elapsed-time consistency and a known Atlanta anchor.",
+    "Non-reporting, ferry, maintenance, or otherwise omitted legs may interrupt observed BTS tail sequences.",
+    "The Jan 1 boundary censors any previous leg in Dec 2024; link estimates are within the supplied Q1 window.",
+    "The 60-minute cutoff is a prespecified analytical choice for this audit, not a claim about airline decision practice."
+  ]
+}

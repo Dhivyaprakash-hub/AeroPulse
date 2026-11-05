@@ -1,0 +1,4 @@
+month,operated_tail_flights,consecutive_same_tail_same_airport,previous_arrived_at_least_60m_before_sched_dep,distinct_tails
+2025-01,522266,509017,348199,5609
+2025-02,496468,489067,327584,5563
+2025-03,592296,583057,377500,5626

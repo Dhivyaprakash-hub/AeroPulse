@@ -1,0 +1,174 @@
+{
+  "study_window": {
+    "warmup": "2023-12",
+    "train": "2024-01 through 2024-12",
+    "validation": "2025-01 through 2025-12",
+    "test": "2026-01 through 2026-08"
+  },
+  "input_candidate_rows": 11480683,
+  "rows_by_year": {
+    "2024": 4382083,
+    "2025": 4278754,
+    "2026": 2819846
+  },
+  "target_clipping_for_model_fit_only_minutes": [
+    -120,
+    900
+  ],
+  "validation_models": [
+    {
+      "model": "A_schedule_only",
+      "category_shrinkage": 10.0,
+      "rows": 4278754,
+      "mae_minutes": 18.282326313417887,
+      "rmse_minutes": 41.58358430116524,
+      "r2": 0.009451791053600167
+    },
+    {
+      "model": "A_schedule_only",
+      "category_shrinkage": 50.0,
+      "rows": 4278754,
+      "mae_minutes": 18.158530592197838,
+      "rmse_minutes": 41.50957909865113,
+      "r2": 0.012974358523913265
+    },
+    {
+      "model": "A_schedule_only",
+      "category_shrinkage": 200.0,
+      "rows": 4278754,
+      "mae_minutes": 18.10191214953061,
+      "rmse_minutes": 41.492426262176224,
+      "r2": 0.013789919258308525
+    },
+    {
+      "model": "B_plus_previous_leg",
+      "category_shrinkage": 10.0,
+      "rows": 4278754,
+      "mae_minutes": 18.241114294772103,
+      "rmse_minutes": 41.49142213417496,
+      "r2": 0.01383765178512697
+    },
+    {
+      "model": "B_plus_previous_leg",
+      "category_shrinkage": 50.0,
+      "rows": 4278754,
+      "mae_minutes": 18.1178506141767,
+      "rmse_minutes": 41.41780846573918,
+      "r2": 0.017333826449972056
+    },
+    {
+      "model": "B_plus_previous_leg",
+      "category_shrinkage": 200.0,
+      "rows": 4278754,
+      "mae_minutes": 18.061077805770886,
+      "rmse_minutes": 41.39972336682719,
+      "r2": 0.01819180207030091
+    }
+  ],
+  "selected_category_shrinkage_by_model": {
+    "A_schedule_only": 200.0,
+    "B_plus_previous_leg": 200.0
+  },
+  "final_test_metrics": {
+    "A_schedule_only": {
+      "rows": 2819846,
+      "mae_minutes": 19.31706289405525,
+      "rmse_minutes": 44.33975099528249,
+      "r2": 0.015313472223765445
+    },
+    "B_plus_previous_leg": {
+      "rows": 2819846,
+      "mae_minutes": 19.21803859080966,
+      "rmse_minutes": 44.23545198703502,
+      "r2": 0.01994051837676658
+    }
+  },
+  "paired_day_bootstrap": {
+    "days": 243,
+    "mae_improvement_b_minus_a_minutes": 0.09797431634139332,
+    "paired_day_bootstrap_95pct_ci": [
+      0.08050366778689338,
+      0.11534232075116853
+    ]
+  },
+  "high_confidence_turnaround_subset": {
+    "filter": "target actual departure minus previous actual arrival >= 15 minutes",
+    "rows": 2819846,
+    "coverage_of_eligible_test_links_pct": 100.0,
+    "A_mae_minutes": 19.31706289405525,
+    "B_mae_minutes": 19.21803859080966,
+    "interpretation": "All eligible 2026 test links pass this filter; this check does not reduce the test cohort."
+  },
+  "route_offset_robustness_subset": {
+    "filter": "route's modal schedule-derived UTC-offset difference agrees on >=99% of audited records",
+    "rows": 2556152,
+    "coverage_of_eligible_test_links_pct": 90.6486,
+    "A_mae_minutes": 19.44205242929792,
+    "B_mae_minutes": 19.332244195683703,
+    "mae_improvement_minutes": 0.10980823361421699
+  },
+  "monthly_final_test_metrics": [
+    {
+      "month": "2026-01",
+      "rows": 338245,
+      "A_mae_minutes": 19.84479342999017,
+      "B_mae_minutes": 19.733894964051927,
+      "mae_improvement_minutes": 0.11089846593824149
+    },
+    {
+      "month": "2026-02",
+      "rows": 324697,
+      "A_mae_minutes": 17.653588298473682,
+      "B_mae_minutes": 17.6534547982806,
+      "mae_improvement_minutes": 0.00013350019308333572
+    },
+    {
+      "month": "2026-03",
+      "rows": 360893,
+      "A_mae_minutes": 19.777564503898375,
+      "B_mae_minutes": 19.721893846085,
+      "mae_improvement_minutes": 0.05567065781337632
+    },
+    {
+      "month": "2026-04",
+      "rows": 368619,
+      "A_mae_minutes": 16.994243796337255,
+      "B_mae_minutes": 16.9158604427481,
+      "mae_improvement_minutes": 0.07838335358915316
+    },
+    {
+      "month": "2026-05",
+      "rows": 372350,
+      "A_mae_minutes": 18.4486174782927,
+      "B_mae_minutes": 18.26321527807501,
+      "mae_improvement_minutes": 0.18540220021769116
+    },
+    {
+      "month": "2026-06",
+      "rows": 350390,
+      "A_mae_minutes": 19.784877512959643,
+      "B_mae_minutes": 19.644576106736757,
+      "mae_improvement_minutes": 0.14030140622288556
+    },
+    {
+      "month": "2026-07",
+      "rows": 349467,
+      "A_mae_minutes": 22.134595743981258,
+      "B_mae_minutes": 21.984327731174073,
+      "mae_improvement_minutes": 0.15026801280718516
+    },
+    {
+      "month": "2026-08",
+      "rows": 355185,
+      "A_mae_minutes": 19.95470180029011,
+      "B_mae_minutes": 19.892801911639705,
+      "mae_improvement_minutes": 0.06189988865040519
+    }
+  ],
+  "model_description": "Additive fixed-effect model with shrinkage for categorical schedule features and linear numeric effects. Model B adds only previous-leg arrival/departure delay and the target scheduled-departure minus previous actual-arrival gap. Shared daily/monthly/airport/carrier/route schedule features are identical in A and B.",
+  "limitations": [
+    "The model is a transparent portfolio pilot, not an airline operational predictor.",
+    "The first-order schedule-derived UTC offset method and reporting gaps can still create false or missing aircraft links.",
+    "2024/2025/2026 performance may reflect reporting or operational distribution shifts; report monthly and carrier-level results before stronger claims."
+  ]
+}

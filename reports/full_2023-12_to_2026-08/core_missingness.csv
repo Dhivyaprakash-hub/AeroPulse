@@ -1,0 +1,17 @@
+field,missing_rows,missing_pct
+FlightDate,0,0.0
+Reporting_Airline,0,0.0
+Tail_Number,47488,0.24504
+Flight_Number_Reporting_Airline,1,1e-05
+OriginAirportID,0,0.0
+DestAirportID,0,0.0
+CRSDepTime,0,0.0
+DepTime,292548,1.50955
+DepDelay,293727,1.51563
+CRSArrTime,0,0.0
+ArrTime,311182,1.6057
+ArrDelay,359268,1.85383
+Cancelled,0,0.0
+Diverted,0,0.0
+CRSElapsedTime,5,3e-05
+ActualElapsedTime,359268,1.85383

@@ -1,0 +1,1 @@
+FlightDate,Reporting_Airline,Tail_Number,Flight_Number_Reporting_Airline,Origin,Dest,ArrDelay,DepDelay,prev_flight_date,prev_arr_delay,prev_dep_delay,sched_dep_utc,prev_arrival_utc

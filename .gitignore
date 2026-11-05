@@ -1,0 +1,15 @@
+# Never publish source archives or extracted flight-level data.
+*.zip
+raw_data/
+data/raw/
+*_On_Time_Performance_*.csv
+candidate_links*.csv.gz
+*.parquet
+
+# Local environment and temporary analysis artifacts.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db

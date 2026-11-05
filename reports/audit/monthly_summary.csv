@@ -1,0 +1,4 @@
+month,flights,carriers,origin_airports,destination_airports,tails,tail_present,cancelled,diverted,tail_coverage_pct
+2025-01,539747,14,329,329,5612,537217,16312.0,1166.0,99.5313
+2025-02,504884,14,330,330,5566,504080,7405.0,1003.0,99.8408
+2025-03,600872,14,332,332,5631,600104,6923.0,1648.0,99.8722
