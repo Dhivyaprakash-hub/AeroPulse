@@ -12,7 +12,7 @@ Across 2.82 million future test flights (January–August 2026), adding previous
 |---|---|---|
 | Audited 33 monthly source archives | 19.38 million records, missingness and clock checks, monthly inventories | Establishes whether the data can answer the question before modelling. |
 | Reconstructed candidate aircraft chains | 18.72 million adjacent reported same-tail/airport pairs, DST and turnaround diagnostics | Turns separate flight records into a testable sequence problem while exposing reconstruction uncertainty. |
-| Defined information availability | Previous leg arrived by a fixed 60-minute prediction cutoff | Prevents a model from using information that would arrive too late for the stated decision. |
+| Applied a prior-arrival cutoff | Previous leg arrived by 60 minutes before scheduled departure | Bounds prior-leg arrival time. Real-time availability of aircraft assignment and predecessor identity is unverified. |
 | Compared two matched models | Identical cohorts; 2024 training, 2025 validation, 2026 test | Measures the added value of previous-leg features without changing the evaluated flights. |
 | Quantified uncertainty and sensitivity | Daily bootstrap interval, monthly results, route-consistency subset | Checks whether the small improvement persists beyond one pooled score. |
 | Packaged the study for inspection | Reproduction scripts, aggregate tables, research report, model card, Streamlit explorer | Lets another analyst inspect assumptions and reproduce the investigation. |
@@ -28,6 +28,16 @@ For a Business Analytics portfolio, the project provides concrete evidence of da
 Flight delay propagation is an established research topic. AeroPulse does not claim to invent it or outperform established systems. The contribution is an end-to-end, auditable study using public BTS data: multi-year data checks, explicit aircraft-link reconstruction, declared prediction-time cutoff, strict time-based holdout, paired uncertainty, route-confidence sensitivity, and a clear account of where the result is too small to justify an operational claim.
 
 ## Study design
+
+```mermaid
+flowchart LR
+    BTS[BTS monthly archives] --> Audit[Audit coverage and clocks]
+    BTS --> Links[Reconstruct candidate links]
+    Links --> Cohort[Apply 60-minute prior-arrival cutoff]
+    Cohort --> Compare[Compare matched models by year]
+    Audit --> Compare
+    Compare --> Results[Publish aggregate results]
+```
 
 - **Question:** Does the previous reported flight of the same aircraft add predictive signal for target arrival delay?
 - **Cutoff:** Previous flight must have arrived at least 60 minutes before target scheduled departure.
@@ -49,6 +59,8 @@ streamlit run app.py
 ```
 
 The explorer uses only the aggregate result files committed in `reports/`; it does not load flight-level records.
+
+![AeroPulse explorer showing the two published MAE values, the estimated improvement, and the route sensitivity result](docs/images/explorer.webp)
 
 ## Reproduce the analysis
 
@@ -84,6 +96,10 @@ For a smaller initial check, the original Q1 scripts can be run with the January
 ## Repository contents
 
 To check the published artifacts without downloading BTS data, run `python src/check_artifacts.py`. It checks Python syntax and JSON readability, reconciles monthly weighted MAE against the pooled results, verifies matched test cohort sizes, and checks that source archives and compressed row-level features are absent. GitHub Actions runs this check on pushes and pull requests.
+
+After installing dependencies, run `python -m unittest discover -s tests` to exercise the model comparison and candidate-link reporting on synthetic data. The fixtures cover missing values, a new test-period carrier, undefined metrics, the exact arrival cutoff, and pairs that cross aircraft.
+
+The saved monthly adjacency column in the original reports included some cross-aircraft rows. The full-window column sums to 18,717,581, while the separately computed same-tail total is 18,717,451. The model's candidate filter already requires the same aircraft. The reporting code now applies that check to the monthly column too. Use the source archives to regenerate the monthly counts.
 
 - `src/` — audit, sequence reconstruction, and model comparison scripts.
 - `app.py` — compact, interactive research-result explainer.

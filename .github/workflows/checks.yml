@@ -23,6 +23,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
+      - name: Exercise model comparison and link reporting on synthetic data
+        run: python -m unittest discover -s tests
       - name: Smoke check research explorer
         run: |
           python - <<'PY'

@@ -37,7 +37,12 @@ left, right = st.columns(2)
 with left:
     st.subheader("Same flights, two models")
     st.metric("Schedule-only baseline MAE", f"{a['mae_minutes']:.3f} min")
-    st.metric("Plus previous-leg information MAE", f"{b['mae_minutes']:.3f} min", f"−{improvement * 60:.1f} sec")
+    st.metric(
+        "Plus previous-leg information MAE",
+        f"{b['mae_minutes']:.3f} min",
+        f"{-improvement * 60:+.1f} sec",
+        delta_color="inverse",
+    )
     st.caption(
         f"Paired daily bootstrap 95% interval for the MAE gain: "
         f"{ci[0]:.3f}–{ci[1]:.3f} minutes across {result['paired_day_bootstrap']['days']} test days."

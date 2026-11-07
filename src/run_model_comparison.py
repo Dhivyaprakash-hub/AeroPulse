@@ -20,12 +20,16 @@ def build_numeric(frame: pd.DataFrame, cols: list[str], fit_mask: np.ndarray):
     raw = frame[cols].to_numpy(dtype=np.float64, copy=True)
     raw[~np.isfinite(raw)] = np.nan
     train = raw[fit_mask]
-    medians = np.nanmedian(train, axis=0)
+    observed = np.isfinite(train).any(axis=0)
+    medians = np.zeros(train.shape[1], dtype=np.float64)
+    medians[observed] = np.nanmedian(train[:, observed], axis=0)
     raw = np.where(np.isnan(raw), medians, raw)
     means = raw[fit_mask].mean(axis=0)
     scales = raw[fit_mask].std(axis=0)
     scales[scales < 1e-8] = 1.0
-    return ((raw - means) / scales).astype(np.float32), (medians, means, scales)
+    normalized = ((raw - means) / scales).astype(np.float32)
+    normalized[:, ~observed] = 0
+    return normalized, (medians, means, scales)
 
 
 def fit_additive(cats_train, levels, x_train, y_train, alpha: float, passes: int = 4):
@@ -59,8 +63,11 @@ def predict_additive(model, cats, x):
 
 
 def metrics(y, pred):
+    if not len(y):
+        return {"rows": 0, "mae_minutes": None, "rmse_minutes": None, "r2": None}
     err = pred.astype(np.float64) - y.astype(np.float64)
-    return {"rows": int(len(y)), "mae_minutes": float(np.mean(np.abs(err))), "rmse_minutes": float(np.sqrt(np.mean(err ** 2))), "r2": float(1 - np.sum(err ** 2) / np.sum((y - y.mean()) ** 2))}
+    total_variation = np.sum((y - y.mean()) ** 2)
+    return {"rows": int(len(y)), "mae_minutes": float(np.mean(np.abs(err))), "rmse_minutes": float(np.sqrt(np.mean(err ** 2))), "r2": float(1 - np.sum(err ** 2) / total_variation) if total_variation else None}
 
 
 def daily_bootstrap(y, pred_a, pred_b, dates, seed=214):
@@ -101,7 +108,7 @@ def main() -> None:
     frame["route_hour_code"] = (pd.factorize(pd.MultiIndex.from_arrays([frame["route_code"], frame["scheduled_dep_hour"]]), sort=False)[0]).astype(np.int32)
     cat_arrays, levels = [], []
     for c in CAT_COLS:
-        codes, uniques = pd.factorize(frame[c], sort=False)
+        codes, uniques = pd.factorize(frame[c], sort=False, use_na_sentinel=False)
         cat_arrays.append(codes.astype(np.int32))
         levels.append(len(uniques))
     all_cats = cat_arrays
@@ -136,7 +143,6 @@ def main() -> None:
 
     test_metrics = {}
     test_predictions = {}
-    test_x = {}
     tr = masks[2024] | masks[2025]
     te = masks[2026]
     for name, numeric_cols in (("A_schedule_only", base_num_cols), ("B_plus_previous_leg", base_num_cols + prior_num_cols)):
@@ -153,9 +159,11 @@ def main() -> None:
     pred_a, pred_b = test_predictions["A_schedule_only"], test_predictions["B_plus_previous_leg"]
     paired = daily_bootstrap(y_test, pred_a, pred_b, test_dates)
     hi = frame.loc[te, "actual_turn_gap_min"].to_numpy(dtype=np.float32) >= 15
-    high_confidence = {"filter": "target actual departure minus previous actual arrival >= 15 minutes", "rows": int(hi.sum()), "coverage_of_eligible_test_links_pct": round(100 * float(hi.mean()), 4), "A_mae_minutes": metrics(y_test[hi], pred_a[hi])["mae_minutes"], "B_mae_minutes": metrics(y_test[hi], pred_b[hi])["mae_minutes"], "interpretation": "All eligible 2026 test links pass this filter; this check does not reduce the test cohort."}
+    high_confidence = {"filter": "target actual departure minus previous actual arrival >= 15 minutes", "rows": int(hi.sum()), "coverage_of_eligible_test_links_pct": round(100 * float(hi.mean()), 4), "A_mae_minutes": metrics(y_test[hi], pred_a[hi])["mae_minutes"], "B_mae_minutes": metrics(y_test[hi], pred_b[hi])["mae_minutes"], "interpretation": "All eligible test links pass this filter; this check does not reduce the test cohort." if hi.all() else "This retrospective subset uses actual target departure and is not available at prediction time."}
     route_hi = frame.loc[te, "route_offset_agreement"].to_numpy(dtype=np.float32) >= .99
-    route_robustness = {"filter": "route's modal schedule-derived UTC-offset difference agrees on >=99% of audited records", "rows": int(route_hi.sum()), "coverage_of_eligible_test_links_pct": round(100 * float(route_hi.mean()), 4), "A_mae_minutes": metrics(y_test[route_hi], pred_a[route_hi])["mae_minutes"], "B_mae_minutes": metrics(y_test[route_hi], pred_b[route_hi])["mae_minutes"], "mae_improvement_minutes": metrics(y_test[route_hi], pred_a[route_hi])["mae_minutes"] - metrics(y_test[route_hi], pred_b[route_hi])["mae_minutes"]}
+    route_a = metrics(y_test[route_hi], pred_a[route_hi])["mae_minutes"]
+    route_b = metrics(y_test[route_hi], pred_b[route_hi])["mae_minutes"]
+    route_robustness = {"filter": "route's modal schedule-derived UTC-offset difference agrees on >=99% of audited records", "rows": int(route_hi.sum()), "coverage_of_eligible_test_links_pct": round(100 * float(route_hi.mean()), 4), "A_mae_minutes": route_a, "B_mae_minutes": route_b, "mae_improvement_minutes": route_a - route_b if route_hi.any() else None}
     test_month = frame.loc[te, "FlightDate"].dt.to_period("M").astype("string").to_numpy()
     monthly_test = []
     for month in sorted(np.unique(test_month)):
@@ -183,7 +191,7 @@ def main() -> None:
             "2024/2025/2026 performance may reflect reporting or operational distribution shifts; report monthly and carrier-level results before stronger claims.",
         ],
     }
-    (args.output / "model_comparison.json").write_text(json.dumps(outputs, indent=2), encoding="utf-8")
+    (args.output / "model_comparison.json").write_text(json.dumps(outputs, indent=2, allow_nan=False), encoding="utf-8")
     pd.DataFrame(validation_results).to_csv(args.output / "validation_metrics.csv", index=False)
     pd.DataFrame(monthly_test).to_csv(args.output / "monthly_test_metrics.csv", index=False)
     print(json.dumps({"validation_best_alpha": selected_alpha, "final_test": test_metrics, "paired_day_bootstrap": paired, "high_confidence_subset": high_confidence, "route_robustness": route_robustness, "monthly_test": monthly_test}, indent=2))

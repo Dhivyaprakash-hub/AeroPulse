@@ -208,12 +208,13 @@ def main() -> None:
     usable["prev_flight_date"] = usable["FlightDate"].shift(1)
     same_tail_previous_row = usable["Tail_Number"] == usable["prev_tail"]
     same_airport = usable["OriginAirportID"] == usable["prev_dest_id"]
+    same_tail_airport = same_tail_previous_row & same_airport
     cutoff_utc = usable["sched_dep_utc"] - pd.Timedelta(minutes=60)
     previous_available = usable["prev_arrival_utc"] <= cutoff_utc
-    valid_previous = same_tail_previous_row & same_airport & previous_available
+    valid_previous = same_tail_airport & previous_available
     month_labels = usable["FlightDate"].dt.to_period("M").astype("string")
     usable["same_tail_previous_row"] = same_tail_previous_row
-    usable["same_airport_as_previous"] = same_airport
+    usable["same_tail_and_airport_as_previous"] = same_tail_airport
     usable["valid_previous_leg_at_60m_cutoff"] = valid_previous
     usable["month"] = month_labels
     monthly_links = (
@@ -221,7 +222,7 @@ def main() -> None:
         .groupby("month")
         .agg(
             operated_tail_flights=("Tail_Number", "size"),
-            consecutive_same_tail_same_airport=("same_airport_as_previous", "sum"),
+            consecutive_same_tail_same_airport=("same_tail_and_airport_as_previous", "sum"),
             previous_arrived_at_least_60m_before_sched_dep=("valid_previous_leg_at_60m_cutoff", "sum"),
             distinct_tails=("Tail_Number", "nunique"),
         ).reset_index()
@@ -240,7 +241,6 @@ def main() -> None:
 
     # Additional diagnostics: transition conditions, duplicated physical keys,
     # and clock-delta confirmation against HHMM arithmetic.
-    same_tail_airport = same_tail_previous_row & same_airport
     gap = usable["sched_dep_utc"] - usable["prev_arrival_utc"]
     actual_turn_gap = usable["actual_dep_utc"] - usable["prev_arrival_utc"]
     paired_gap = actual_turn_gap[same_tail_airport].dt.total_seconds() / 60
@@ -292,7 +292,7 @@ def main() -> None:
         "limitations": [
             "BTS local-time fields do not directly provide UTC timestamps; inferred airport offsets depend on scheduled elapsed-time consistency and a known Atlanta anchor.",
             "Non-reporting, ferry, maintenance, or otherwise omitted legs may interrupt observed BTS tail sequences.",
-            "The Jan 1 boundary censors any previous leg in Dec 2024; link estimates are within the supplied Q1 window.",
+            "The first archive boundary can hide a previous leg outside the supplied window.",
             "The 60-minute cutoff is a prespecified analytical choice for this audit, not a claim about airline decision practice.",
         ],
     }
