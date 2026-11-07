@@ -35,6 +35,8 @@ The MAE improvement is about 5.9 seconds (0.51%). Paired daily bootstrap 95% int
 - Only one additive model family was evaluated; no tree model, calibration analysis, placebo test, or prospective validation is included.
 - BTS is a reporting dataset, and missing movements can make reported flights appear adjacent.
 - Local times are converted to UTC using schedule-derived airport offset differences, not an official flight-level UTC field.
+- Offset graphs and route agreement diagnostics were estimated across the audited period, including the test dates. The chronological split applies to model fitting and tuning. To test the complete pipeline prospectively, freeze an airport-offset mapping and route diagnostics using only earlier data or a versioned external timezone reference.
+- The paired bootstrap gives each date equal weight. The overall MAE gives each flight equal weight, so the two quantities can differ. Resampling single dates also leaves possible dependence across neighboring days unmodeled.
 - Aircraft tails and flight order come from final reported records. The study has no historical snapshot proving that the target aircraft assignment and predecessor identity were known at the 60-minute cutoff. The cutoff enforces prior-arrival timing, but full real-time feature availability is unverified.
 - Results are conditioned on an eligible previous-flight link. Availability varies and must accompany any error metric.
 
