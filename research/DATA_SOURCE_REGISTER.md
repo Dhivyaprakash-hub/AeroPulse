@@ -18,7 +18,9 @@ The submitted ZIPs were read in place. The audit recorded file sizes and archive
 | 2025-02 | `12DC8DBDB3C8B3C20D4C00A8B188196AE202F781A8760871AE502A9C733D0ECD` |
 | 2025-03 | `9C80FBC2112CDBF3F0613EC2001BA019B3AD75511CD69657080736E7EDA9CEF4` |
 
-Data ZIPs were not copied into the repository.
+The [full reproduction manifest](../reports/full_2023-12_to_2026-08/archive-checksums.csv) records the filename, byte count, and SHA-256 digest for all 33 archives retrieved from the official [BTS PREZIP directory](https://www.transtats.bts.gov/PREZIP/). The January–March 2025 hashes matched the three previously recorded digests. Data ZIPs were not copied into the repository.
+
+The reproduction used Python 3.13.7, NumPy 2.5.5, pandas 3.1.1, and tzdata 2026.6.
 
 ## Coverage and completeness caveat
 

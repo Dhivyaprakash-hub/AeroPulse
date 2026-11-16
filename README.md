@@ -121,3 +121,7 @@ Before attempting productization, establish a minimum practically worthwhile imp
 ## Decision
 
 **Research portfolio project: go. Operational prediction product: no-go on current evidence.** A small, honest result with strong reproducibility is more credible than presenting a marginal score change as a major aviation solution.
+
+## License
+
+The original AeroPulse scripts and documentation are available under the [MIT License](LICENSE). Source archives remain subject to their own terms. See the [data and source register](research/DATA_SOURCE_REGISTER.md) for provenance.
