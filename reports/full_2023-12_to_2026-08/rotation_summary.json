@@ -41,21 +41,21 @@
     {
       "month": "2023-12",
       "operated_tail_flights": 566937,
-      "consecutive_same_tail_same_airport": 553529,
+      "consecutive_same_tail_same_airport": 553423,
       "previous_arrived_at_least_60m_before_sched_dep": 371654,
       "distinct_tails": 5572
     },
     {
       "month": "2024-01",
       "operated_tail_flights": 525336,
-      "consecutive_same_tail_same_airport": 516150,
+      "consecutive_same_tail_same_airport": 516148,
       "previous_arrived_at_least_60m_before_sched_dep": 331147,
       "distinct_tails": 5601
     },
     {
       "month": "2024-02",
       "operated_tail_flights": 515265,
-      "consecutive_same_tail_same_airport": 507708,
+      "consecutive_same_tail_same_airport": 507707,
       "previous_arrived_at_least_60m_before_sched_dep": 349811,
       "distinct_tails": 5592
     },
@@ -83,7 +83,7 @@
     {
       "month": "2024-06",
       "operated_tail_flights": 601259,
-      "consecutive_same_tail_same_airport": 591935,
+      "consecutive_same_tail_same_airport": 591934,
       "previous_arrived_at_least_60m_before_sched_dep": 352516,
       "distinct_tails": 5591
     },
@@ -104,14 +104,14 @@
     {
       "month": "2024-09",
       "operated_tail_flights": 578261,
-      "consecutive_same_tail_same_airport": 572295,
+      "consecutive_same_tail_same_airport": 572294,
       "previous_arrived_at_least_60m_before_sched_dep": 381613,
       "distinct_tails": 5630
     },
     {
       "month": "2024-10",
       "operated_tail_flights": 608504,
-      "consecutive_same_tail_same_airport": 601926,
+      "consecutive_same_tail_same_airport": 601925,
       "previous_arrived_at_least_60m_before_sched_dep": 409799,
       "distinct_tails": 5671
     },
@@ -125,7 +125,7 @@
     {
       "month": "2024-12",
       "operated_tail_flights": 584828,
-      "consecutive_same_tail_same_airport": 575817,
+      "consecutive_same_tail_same_airport": 575815,
       "previous_arrived_at_least_60m_before_sched_dep": 367612,
       "distinct_tails": 5711
     },
@@ -139,14 +139,14 @@
     {
       "month": "2025-02",
       "operated_tail_flights": 496468,
-      "consecutive_same_tail_same_airport": 489093,
+      "consecutive_same_tail_same_airport": 489092,
       "previous_arrived_at_least_60m_before_sched_dep": 327618,
       "distinct_tails": 5563
     },
     {
       "month": "2025-03",
       "operated_tail_flights": 592296,
-      "consecutive_same_tail_same_airport": 583075,
+      "consecutive_same_tail_same_airport": 583073,
       "previous_arrived_at_least_60m_before_sched_dep": 377520,
       "distinct_tails": 5626
     },
@@ -160,7 +160,7 @@
     {
       "month": "2025-05",
       "operated_tail_flights": 597570,
-      "consecutive_same_tail_same_airport": 588840,
+      "consecutive_same_tail_same_airport": 588838,
       "previous_arrived_at_least_60m_before_sched_dep": 365292,
       "distinct_tails": 5637
     },
@@ -174,7 +174,7 @@
     {
       "month": "2025-07",
       "operated_tail_flights": 612800,
-      "consecutive_same_tail_same_airport": 600632,
+      "consecutive_same_tail_same_airport": 600631,
       "previous_arrived_at_least_60m_before_sched_dep": 348158,
       "distinct_tails": 5669
     },
@@ -188,7 +188,7 @@
     {
       "month": "2025-09",
       "operated_tail_flights": 558320,
-      "consecutive_same_tail_same_airport": 551898,
+      "consecutive_same_tail_same_airport": 551897,
       "previous_arrived_at_least_60m_before_sched_dep": 370467,
       "distinct_tails": 5597
     },
@@ -202,7 +202,7 @@
     {
       "month": "2025-11",
       "operated_tail_flights": 555294,
-      "consecutive_same_tail_same_airport": 546629,
+      "consecutive_same_tail_same_airport": 546628,
       "previous_arrived_at_least_60m_before_sched_dep": 355278,
       "distinct_tails": 5676
     },
@@ -216,7 +216,7 @@
     {
       "month": "2026-01",
       "operated_tail_flights": 517219,
-      "consecutive_same_tail_same_airport": 506717,
+      "consecutive_same_tail_same_airport": 506714,
       "previous_arrived_at_least_60m_before_sched_dep": 338245,
       "distinct_tails": 5698
     },
@@ -230,7 +230,7 @@
     {
       "month": "2026-03",
       "operated_tail_flights": 592246,
-      "consecutive_same_tail_same_airport": 579514,
+      "consecutive_same_tail_same_airport": 579512,
       "previous_arrived_at_least_60m_before_sched_dep": 360893,
       "distinct_tails": 5779
     },
@@ -244,21 +244,21 @@
     {
       "month": "2026-05",
       "operated_tail_flights": 604335,
-      "consecutive_same_tail_same_airport": 595310,
+      "consecutive_same_tail_same_airport": 595309,
       "previous_arrived_at_least_60m_before_sched_dep": 372350,
       "distinct_tails": 5718
     },
     {
       "month": "2026-06",
       "operated_tail_flights": 595187,
-      "consecutive_same_tail_same_airport": 585065,
+      "consecutive_same_tail_same_airport": 585064,
       "previous_arrived_at_least_60m_before_sched_dep": 350390,
       "distinct_tails": 5652
     },
     {
       "month": "2026-07",
       "operated_tail_flights": 612029,
-      "consecutive_same_tail_same_airport": 600420,
+      "consecutive_same_tail_same_airport": 600419,
       "previous_arrived_at_least_60m_before_sched_dep": 349467,
       "distinct_tails": 5684
     },
@@ -273,7 +273,7 @@
   "limitations": [
     "BTS local-time fields do not directly provide UTC timestamps; inferred airport offsets depend on scheduled elapsed-time consistency and a known Atlanta anchor.",
     "Non-reporting, ferry, maintenance, or otherwise omitted legs may interrupt observed BTS tail sequences.",
-    "The December 2023 left boundary censors any November 2023 previous leg for flights near the beginning of the window; 2024–August 2026 provide the model periods.",
+    "The first archive boundary can hide a previous leg outside the supplied window.",
     "The 60-minute cutoff is a prespecified analytical choice for this audit, not a claim about airline decision practice."
   ]
 }

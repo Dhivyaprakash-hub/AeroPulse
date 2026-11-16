@@ -97,11 +97,11 @@ For a smaller initial check, the original Q1 scripts can be run with the January
 
 ## Repository contents
 
-In a Git checkout, run `python src/check_artifacts.py` to check the published artifacts without downloading BTS data. It checks tracked Python and JSON files, reconciles monthly weighted MAE against the pooled results, verifies matched test cohort sizes, and rejects tracked ZIP, compressed CSV, and Parquet files. Local virtual environments and other untracked files are outside the check. GitHub Actions runs this check on pushes and pull requests.
+In a Git checkout, run `python src/check_artifacts.py` to check the published artifacts without downloading BTS data. It checks tracked Python and JSON files, reconciles monthly rotation totals and weighted MAE, verifies matched test cohort sizes, and rejects tracked ZIP, compressed CSV, and Parquet files. Local virtual environments and other untracked files are outside the check. GitHub Actions runs this check on pushes and pull requests.
 
 After installing dependencies, run `python -m unittest discover -s tests` to exercise the model comparison and candidate-link reporting on synthetic data. The fixtures cover missing values, a new test-period carrier, undefined metrics, the exact arrival cutoff, and pairs that cross aircraft.
 
-The saved monthly adjacency column in the original reports included some cross-aircraft rows. The full-window column sums to 18,717,581, while the separately computed same-tail total is 18,717,451. The model's candidate filter already requires the same aircraft. The reporting code now applies that check to the monthly column too. Use the source archives to regenerate the monthly counts.
+A full rerun regenerated the monthly adjacency table from all 33 BTS archives. It now reconciles to 18,717,451 adjacent observations from the same tail at a connecting airport, 130 fewer than the previous monthly count. The 60-minute cutoff cohort still contains 11,852,337 links. The artifact check reconciles both monthly totals against the rotation summary.
 
 - `src/` — audit, sequence reconstruction, and model comparison scripts.
 - `app.py` — compact, interactive research-result explainer.
