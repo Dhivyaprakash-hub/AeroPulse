@@ -8,6 +8,10 @@
 
 Across 2.82 million future test flights (January–August 2026), adding previous-leg features lowered MAE from 19.317 to 19.218 minutes, a gain of about six seconds. The gain remains on routes with highly consistent inferred time-offset relationships. This is evidence of a small incremental signal, not evidence of operational value. BTS candidate links are not confirmed aircraft rotations, and the model is a research baseline, not a deployed airline predictor.
 
+![Monthly holdout MAE gains ranged from nearly zero in February to 11.12 seconds in May, with a 5.94-second pooled gain](docs/images/verified-holdout-results.png)
+
+The [full-period reproduction](reports/full_2023-12_to_2026-08/REPRODUCTION.md) reran the audit, link reconstruction, and model fit from the 33 BTS archives. It reproduced the published pooled and monthly holdout errors exactly.
+
 ## Work completed
 
 | Work | Evidence produced | Why it matters |
