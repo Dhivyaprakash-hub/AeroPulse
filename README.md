@@ -1,5 +1,7 @@
 # AeroPulse: Flight Delay Propagation Analysis
 
+[![Check research artifacts](https://github.com/Dhivyaprakash-hub/AeroPulse/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/Dhivyaprakash-hub/AeroPulse/actions/workflows/checks.yml)
+
 **A reproducible research project measuring whether an aircraft's previous reported leg adds useful signal for predicting its next flight's arrival delay.**
 
 ## Result at a glance
