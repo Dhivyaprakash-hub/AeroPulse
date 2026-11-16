@@ -1,5 +1,7 @@
 # AeroPulse: Flight Delay Propagation Analysis
 
+[![Check research artifacts](https://github.com/Dhivyaprakash-hub/AeroPulse/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/Dhivyaprakash-hub/AeroPulse/actions/workflows/checks.yml)
+
 **A reproducible research project measuring whether an aircraft's previous reported leg adds useful signal for predicting its next flight's arrival delay.**
 
 ## Result at a glance
@@ -95,7 +97,7 @@ For a smaller initial check, the original Q1 scripts can be run with the January
 
 ## Repository contents
 
-To check the published artifacts without downloading BTS data, run `python src/check_artifacts.py`. It checks Python syntax and JSON readability, reconciles monthly weighted MAE against the pooled results, verifies matched test cohort sizes, and checks that source archives and compressed row-level features are absent. GitHub Actions runs this check on pushes and pull requests.
+In a Git checkout, run `python src/check_artifacts.py` to check the published artifacts without downloading BTS data. It checks tracked Python and JSON files, reconciles monthly weighted MAE against the pooled results, verifies matched test cohort sizes, and rejects tracked ZIP, compressed CSV, and Parquet files. Local virtual environments and other untracked files are outside the check. GitHub Actions runs this check on pushes and pull requests.
 
 After installing dependencies, run `python -m unittest discover -s tests` to exercise the model comparison and candidate-link reporting on synthetic data. The fixtures cover missing values, a new test-period carrier, undefined metrics, the exact arrival cutoff, and pairs that cross aircraft.
 
